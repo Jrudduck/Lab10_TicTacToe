@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class TicTacToe {
     private static String[][] board = new String[3][3];
 
     public static void main(String[] args) {
@@ -51,7 +51,19 @@ public class Main {
                         wantPlay = false;
                         System.exit(0);
                     }
-
+                }
+                if (isTie()){
+                    System.out.println("The game is a tie!");
+                    game = true;
+                    play = InputHelper.getYNConfirm(scan, "Would you like to play tic-tac-toe? [y/n]");
+                    if (play = true) {
+                        wantPlay = true;
+                        game = false;
+                        clearBoard();
+                    } else {
+                        wantPlay = false;
+                        System.exit(0);
+                    }
                 }
                 do {
                     int row = InputHelper.getRangedInt(scan, "Player two, please choose which row[0-2]:", 2, 0);
@@ -161,13 +173,10 @@ public class Main {
             for(int c = 0; c < board[0].length; c++){
                 if(board[r][c].equalsIgnoreCase("-")){
                     full = false;
+                    break;
                 }
             }
         }
-        if(full && !isWin("O") || full && !isWin("x")){
-            return  true;
-        } else {
-            return false;
-        }
+        return full && !isWin("X") && !isWin("O");
     }
 }
